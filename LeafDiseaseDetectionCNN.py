@@ -212,19 +212,19 @@ new_model = Model(layer_input, x)
 new_model.compile(optimizer= "adam", loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 
-# In[ ]:
+# In[18]:
 
 
 history=new_model.fit(trainfeat, trainlab, batch_size=128, epochs=4, validation_split=0.2)
 
 
-# In[ ]:
+# In[19]:
 
 
 plot_accuracy_loss(history)
 
 
-# In[ ]:
+# In[20]:
 
 
 from sklearn.metrics import accuracy_score
@@ -236,13 +236,13 @@ pred_labels = np.argmax(predictions, axis=1)
 print("Accuracy : {}".format(accuracy_score(testlab, pred_labels)))
 
 
-# In[ ]:
+# In[21]:
 
 
 print(classification_report(testlab, pred_labels))
 
 
-# In[ ]:
+# In[22]:
 
 
 dictionary = dict(zip(list(classnameslabel.keys()), list(classnameslabel.values())))
@@ -252,7 +252,7 @@ allpairs=list(dictionary.items())
 #print("Ref :",allpairs[0])
 
 
-# In[ ]:
+# In[23]:
 
 
 def prediction(path):
@@ -265,20 +265,14 @@ def prediction(path):
         print("Your leaf is healthy!!!")
     else:
         print("Your leaf is unhealthy:(")
-    print(f"The image belongs to {allpairs[pred]}")
+    #print(f"The image belongs to {allpairs[pred]}")
 
 
-# In[ ]:
+# In[23]:
 
 
-DIR1=r"D:\tohe.jpg"
-path1=os.path.join(DIR1)
-print(path1)
-prediction(path1)
-
-
-# In[ ]:
-
+#DIR1=r"D:\tohe.jpg"
+#path1=os.path.join(DIR1)
 
 tf.keras.models.save_model(model, 'model.pbtxt')
 
@@ -287,10 +281,4 @@ converter = tf.lite.TFLiteConverter.from_keras_model(model = model)
 model_tflite = converter.convert()
 
 open("le.tflite","wb").write(model_tflite)
-
-
-# In[ ]:
-
-
-
 
